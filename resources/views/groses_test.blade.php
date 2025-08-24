@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>test</h1>
+    <h1>Test Page</h1>
+    <a href={{ route('welcome') }}>Link to welcome</a>
 </body>
 </html>
