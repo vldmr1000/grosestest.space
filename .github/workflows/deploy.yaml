@@ -4,7 +4,8 @@ name: Deploy
 # pull request events on the production branch
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   #pull_request:
     #branches:
       #- production
@@ -16,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy to server
+      - name: Deploy to serv-pl
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
