@@ -5,20 +5,20 @@ on:
     branches: [ "main" ]
 
 jobs:
-  deploy:
+
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.7.0
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
         with:
-          ssh-private-key: ${{ secrets.GROSESTEST }}  # Приватный ключ для доступа к серверу
-
-      - name: Deploy via rsync
-        run: |
-          rsync -avz --delete --exclude='.git/' \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            ./ golg0fa@212.115.110.215:/var/www/golgofa.bar/
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          EXCLUDE: "/dist/, /node_modules/"
