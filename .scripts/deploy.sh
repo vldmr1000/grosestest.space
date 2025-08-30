@@ -8,7 +8,7 @@ echo "Deployment started ... (Деплой начался ...)"
 (php artisan down) || true
 
 # Pull the latest version of the app
-git pull origin main
+git pull origin master
 #git pull
 
 # Install composer dependencies
